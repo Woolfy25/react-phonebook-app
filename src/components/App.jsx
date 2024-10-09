@@ -1,45 +1,58 @@
-import { SharedLayout } from 'pages/SharedLayout';
-import { HomePage } from 'pages/HomePage';
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import LoginPage from '../pages/LoginPage';
-import RegisterPage from '../pages/RegisterPage';
-import { RestrictedRoute } from './RestrictedRoute/RestrictedRoute';
-import { PrivateRoute } from './PrivateRoute/PrivateRoute';
-import { ContactsPage } from 'pages/ContactsPage';
+import React from "react";
+import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 
-export const App = () => {
-  // const isLoggedIn = true;
+// import "./App.css";
+import { PrivateRoute } from "../routes/PrivateRoute";
+import { RestrictedRoute } from "../routes/RestrictedRoute";
 
+// bg-amber-300;
+// bg-violet-300
+const LazyApp = lazy(() => import("../pages/Contacts/Contacts"));
+const LazyNotFound = lazy(() => import("../pages/NotFound/NotFoundPage"));
+const LazyLogin = lazy(() => import("../pages/LoginForm/LoginForm"));
+const LazyRegister = lazy(() => import("../pages/RegisterForm/RegisterForm"));
+
+const App = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<HomePage />} />
+    <div className="flex flex-col items-center gap-2.5 bg-violet-300 h-screen">
+      <Suspense>
+        <Routes>
           <Route
-            path="/register"
+            path="/"
             element={
-              <RestrictedRoute
-                redirectTo="/contacts"
-                component={RegisterPage}
-              />
+              <PrivateRoute redirectTo="/login" component={<LazyApp />} />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<LazyApp />} />
             }
           />
           <Route
             path="/login"
             element={
-              <RestrictedRoute redirectTo="/contacts" component={LoginPage} />
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<LazyLogin />}
+              />
             }
-          />
-        </Route>
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute redirectTo="/login" component={ContactsPage} />
-          }
-        />
-      </Routes>
-    </>
+          ></Route>
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<LazyRegister />}
+              />
+            }
+          ></Route>
+          <Route path="*" element={<LazyNotFound />}></Route>
+        </Routes>
+      </Suspense>
+    </div>
   );
 };
 
+export default App;
