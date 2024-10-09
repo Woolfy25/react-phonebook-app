@@ -2,7 +2,7 @@
   "name": "phonebook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Woolfy25.github.io/goit-react-hw-08-phonebook/",
+  "homepage": "https://Woolfy25.github.io/react-phonebook-app/",
   "dependencies": {
     "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/toolkit": "^2.2.7",
