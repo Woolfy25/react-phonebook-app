@@ -1,6 +1,6 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../../redux/auth/operations";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/auth/operations';
 
 const LogOut = () => {
   const dispatch = useDispatch();
@@ -9,13 +9,13 @@ const LogOut = () => {
   };
 
   return (
-    <div className="flex flex-col mx-auto mt-6 w-96">
+    <div className="flex flex-col w-72">
       <button
         onClick={handleLogout}
         type="button"
-        className="p-2 border-2 border-white"
+        className="text-slate-100 font-medium px-2 py-1 rounded-xl bg-purple-500 hover:bg-purple-400"
       >
-        LogOut
+        Log Out
       </button>
     </div>
   );

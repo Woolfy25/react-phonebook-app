@@ -1,5 +1,5 @@
-import { Link, Navigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { Link, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
 const NotFoundPage = () => {
   const [timer, setTimer] = useState(false);
@@ -22,16 +22,24 @@ const NotFoundPage = () => {
   }, []);
 
   return (
-    <div className="w-full m-auto flex flex-col items-center justify-items-center gap-6">
+    <div
+      className="flex flex-col items-center justify-items-center w-80 rounded gap-12 p-5 my-auto mx-auto shadow-xl"
+      style={{
+        backdropFilter: 'blur(40px)',
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      }}
+    >
       {timer && <Navigate to="/" />}
-      <h2 className="text-5xl font-medium">Page not found!</h2>
+      <h2 className="text-5xl font-medium text-slate-100 text-center">
+        Page not found!
+      </h2>
       <Link
-        className="no-underline p-4 border-2 border-black text-xl text-black"
+        className="no-underline p-2 border-2 border-slate-100 text-l text-slate-100 text-center"
         to="/"
       >
         Return to the website
       </Link>
-      <p className="text-xl font-medium">
+      <p className="text-xl font-medium text-slate-100 text-center">
         You will be redirected to the home page in {timerSeconds}
       </p>
     </div>
